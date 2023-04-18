@@ -14,13 +14,16 @@ def word(password):
         character.append(i)
     return character
 
-if os.path.exists("Sevices/PassCheckerService/PassCheckModel.pkl"):
+modelName = 'PassCheckModel.pkl'
+
+if os.path.exists('PassCheckModel.pkl'):
     print("Loading model from disk... ")
-    with open('Services/PassCheckerService/PassCheckModel.pkl', 'rb') as f:
+    with open(modelName, 'rb') as f:
         model, tdif = pickle.load(f)
+        
 else:
     print("Training model...")
-    data = pd.read_csv("Services/PassCheckerService/Data/data.csv", error_bad_lines=False)
+    data = pd.read_csv("C:/Users/Rasmus Høy Schmidt/source/repos/4. Semester/Eksamen/LogNKey/Services/PassCheckerService/Data/data.csv", on_bad_lines='skip')
     
     data = data.dropna()
     data["strength"] = data["strength"].map({
@@ -43,7 +46,7 @@ else:
     model.fit(xtrain, ytrain)
     print("Accuracy", model.score(xtest, ytest))
     
-    with open("Sevices/PassCheckerService/PassCheckModel.pkl", 'wb') as f:  
+    with open(modelName, "wb") as f:  
         pickle.dump((model, tdif), f)
     
 print("Enter a password to test its strength")
