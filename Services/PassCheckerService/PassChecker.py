@@ -29,7 +29,7 @@ if os.path.exists('PassCheckModel.pkl'):
 else:
     #Loads the dataset used to train and test the model
     print("Training model...")
-    data = pd.read_csv("C:/Users/Rasmus Høy Schmidt/source/repos/4. Semester/Eksamen/LogNKey/Services/PassCheckerService/Data/data.csv", on_bad_lines='skip')
+    data = pd.read_csv("C:/Users/",os.getlogin(),"/source/repos/4. Semester/Eksamen/LogNKey/Services/PassCheckerService/Data/data.csv", on_bad_lines='skip')
     
     #Changes the password strength scores from numbers to strings
     data = data.dropna()
