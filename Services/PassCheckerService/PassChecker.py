@@ -3,10 +3,13 @@ import numpy as np
 import pickle
 import os
 import getpass
+import platform
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
+
+pltfrm = platform.system()
 
 #Chops up the password into individual characters and puts them into an array
 def word(password):
@@ -29,8 +32,11 @@ if os.path.exists('PassCheckModel.pkl'):
 else:
     #Loads the dataset used to train and test the model
     print("Training model...")
-    data = pd.read_csv("C:/Users/",os.getlogin(),"/source/repos/4. Semester/Eksamen/LogNKey/Services/PassCheckerService/Data/data.csv", on_bad_lines='skip')
-    
+    if pltfrm == "Windows":
+        data = pd.read_csv("C:/Users/Rasmus Høy Schmidt/source/repos/4. Semester/Eksamen/LogNKey/Services/PassCheckerService/Data/data.csv", on_bad_lines='skip')
+    else:
+        data = pd.read_csv("Data/data.csv", on_bad_lines='skip')
+        
     #Changes the password strength scores from numbers to strings
     data = data.dropna()
     data["strength"] = data["strength"].map({
