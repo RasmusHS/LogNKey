@@ -9,9 +9,13 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 
+#Gets the systems OS
 pltfrm = platform.system()
-usr = os.getlogin()
-csvPath = f"C:/Users/{usr}/source/repos/4. Semester/Eksamen/LogNKey/Services/PassCheckerService/Data/data.csv"
+
+#Checks if the systems OS is Windows
+if pltfrm == "Windows":
+    usr = os.getlogin()
+    csvPath = f"C:/Users/{usr}/source/repos/4. Semester/Eksamen/LogNKey/Services/PassCheckerService/Data/data.csv"
 
 #Chops up the password into individual characters and puts them into an array
 def word(password):
