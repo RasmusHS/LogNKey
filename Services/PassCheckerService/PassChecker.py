@@ -10,6 +10,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 
 pltfrm = platform.system()
+usr = os.getlogin()
+csvPath = f"C:/Users/{usr}/source/repos/4. Semester/Eksamen/LogNKey/Services/PassCheckerService/Data/data.csv"
 
 #Chops up the password into individual characters and puts them into an array
 def word(password):
@@ -33,7 +35,7 @@ else:
     #Loads the dataset used to train and test the model
     print("Training model...")
     if pltfrm == "Windows":
-        data = pd.read_csv("C:/Users/Rasmus Høy Schmidt/source/repos/4. Semester/Eksamen/LogNKey/Services/PassCheckerService/Data/data.csv", on_bad_lines='skip')
+        data = pd.read_csv(f"C:/Users/{usr}/source/repos/4. Semester/Eksamen/LogNKey/Services/PassCheckerService/Data/data.csv", on_bad_lines='skip')
     else:
         data = pd.read_csv("Data/data.csv", on_bad_lines='skip')
         
