@@ -5,7 +5,7 @@ Få terminalen til at kigge i PassCheckService mappen, som gerne skulle ligge i 
 docker build --no-cache -t passwordchecker .
 
 2: Kør denne docker run command for at skabe en container med navnet "PassCheckContainer", samt køres scriptet også
-docker run -i -t --name PassCheckContainer passwordchecker python PassChecker.py
+docker run -i -t --name PassCheckContainer -p 8800:80 passwordchecker python PassChecker.py
 (hvis man indtaster "stop" så stoppes scriptet og dermed containeren)
 
 3: Brug denne command for at starte containeren og scriptet op igen 
