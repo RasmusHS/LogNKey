@@ -4,6 +4,7 @@ import pickle
 import os
 import getpass
 import platform
+import uuid
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
@@ -72,17 +73,17 @@ else:
     with open(modelName, "wb") as f:  
         pickle.dump((model, tdif), f)
     
-Loop = ""
+#random_uuid = uuid.uuid4()
 
 #Prompts the user to enter a password
-while Loop != "stop":
+while(True):
     print("Enter a password to test its strength")
     user = getpass.getpass("Enter Password: ")
-    Loop = user
+    random_uuid = uuid.uuid4()
     data = tdif.transform([user]).toarray()
     output = model.predict(data)
     print(output)
-    print("To stop enter 'stop' without quotation")
+    #print(random_uuid)
     
 else:
     print("Stopped checking passwords. Re-run the script to start again.")
