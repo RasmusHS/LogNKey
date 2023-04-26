@@ -76,9 +76,10 @@ else:
 #random_uuid = uuid.uuid4()
 
 #Prompts the user to enter a password
+print("Enter a password to test its strength")
+print("Enter Password: ")
 while(True):
-    print("Enter a password to test its strength")
-    user = getpass.getpass("Enter Password: ")
+    user = getpass.getpass("")
     random_uuid = uuid.uuid4()
     data = tdif.transform([user]).toarray()
     output = model.predict(data)
