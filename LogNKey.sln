@@ -5,7 +5,7 @@ VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogNKey", "LogNKey\LogNKey.csproj", "{CA007ABD-F1C4-4733-8165-2773DED02D97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogNKeyCLI", "LogNKeyCLI\LogNKeyCLI.csproj", "{7440E8A5-24D6-42C2-B969-7A21EF684AFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogNKeyCLI", "LogNKeyCLI\LogNKeyCLI.csproj", "{7440E8A5-24D6-42C2-B969-7A21EF684AFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
