@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PassGenApplication.Commands
+namespace PassGenApplication.Commands.Dto
 {
-    public class CreatePasswordCommand
+    public class PasswordCreateRequestDto
     {
-
     }
 }
