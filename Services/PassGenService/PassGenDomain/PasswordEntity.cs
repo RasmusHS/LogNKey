@@ -1,4 +1,7 @@
-﻿namespace PassGenDomain;
+﻿using System.Runtime.CompilerServices;
+using PassGenDomain.PasswordDomainService;
+
+namespace PassGenDomain;
 
 //Det er her password genereringsprocessen ligger 
 public class PasswordEntity
@@ -7,22 +10,42 @@ public class PasswordEntity
     {
     }
 
-    public PasswordEntity(int length, string status)
+    public PasswordEntity(int length/*, string status*/)
     {
         Length = length;
-        Status = status;
+        Id = new PasswordId(Guid.NewGuid());
 
-        Password = CreatePassword(Length);
+        Password = CreatePassword();
     }
 
-
-    public string? Password { get; }
-    public int Length { get; }
+    public PasswordId Id { get; private set; }
+    public string? Password { get; private set; }
+    public int Length { get; private set; }
     public string? Rating { get; private set; }
-    public string Status { get; }
 
-    public string CreatePassword(int length)
+    public string CreatePassword()
     {
-        return new NotImplementedException().ToString();
+        // Password generation algorithm goes here
+
+        var options = new PasswordOptions
+        {
+            Length = this.Length,
+            MinLowercase = 2,
+            MinNumbers = 2,
+            MinSpecial = 2,
+            MinUppercase = 2,
+            UseLowercase = true,
+            UseNumbers = true,
+            UseSpecial = true,
+            UseUppercase = true,
+        };
+        var password = RandomPasswordGenerator.Generate(options);
+
+        return password;
+    }
+
+    public void Edit(PasswordId passwordId, string rating)
+    {
+
     }
 }

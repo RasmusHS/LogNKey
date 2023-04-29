@@ -1,0 +1,35 @@
+version: '3.4'
+
+services:
+  lognkey.api:
+    image: ${DOCKER_REGISTRY-}lognkeyapi
+    build:
+      context: .
+      dockerfile: LogNKey.API/Dockerfile
+
+  lognkey.db:
+    image: postgres:latest
+    container_name: LogNKey-db
+    environment:
+    - POSTGRES_DB=LogNKey
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=postgres
+    volumes:
+    - ./.containers/db:/var/lib/postgresql/data
+    ports:
+    - 5432:5432
+
+  lognkey.mq:
+    image: rabbitmq:3-management
+    container_name: LogNKey-MQ
+    hostname: lognkey-mq
+    volumes:
+    - ./.containers/queue/data/:/var/lib/rabbitmq
+    - ./.containers/queue/log/:/var/log/rabbitmq
+    ports:
+    - 5672:5672
+    - 15672:15672
+    environment:
+        RABBITMQ_DEFAULT_USER: guest
+        RABBITMQ_DEFAULT_PASS: guest
+  

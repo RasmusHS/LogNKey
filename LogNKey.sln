@@ -15,7 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PassGenDomain", "Services\P
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PassGenApplication", "Services\PassGenService\PassGenApplication\PassGenApplication.csproj", "{A43C59E3-27CC-45B3-9B89-A6424309C964}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogNKey.API", "LogNKey.API\LogNKey.API.csproj", "{BF5EB26E-8428-4AC7-A801-39CEF539E7C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogNKey.API", "LogNKey.API\LogNKey.API.csproj", "{BF5EB26E-8428-4AC7-A801-39CEF539E7C8}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{BAEBD59D-9CD0-4617-B09F-078621C0903C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassGenPersistence", "Services\PassGenService\PassGenPersistence\PassGenPersistence.csproj", "{23171A3F-9343-4E00-AA5F-DF9ACCB02171}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{8CE6EC14-23BC-4585-9738-C2F162AC80C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +49,18 @@ Global
 		{BF5EB26E-8428-4AC7-A801-39CEF539E7C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF5EB26E-8428-4AC7-A801-39CEF539E7C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF5EB26E-8428-4AC7-A801-39CEF539E7C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAEBD59D-9CD0-4617-B09F-078621C0903C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAEBD59D-9CD0-4617-B09F-078621C0903C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAEBD59D-9CD0-4617-B09F-078621C0903C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAEBD59D-9CD0-4617-B09F-078621C0903C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23171A3F-9343-4E00-AA5F-DF9ACCB02171}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23171A3F-9343-4E00-AA5F-DF9ACCB02171}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23171A3F-9343-4E00-AA5F-DF9ACCB02171}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23171A3F-9343-4E00-AA5F-DF9ACCB02171}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CE6EC14-23BC-4585-9738-C2F162AC80C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CE6EC14-23BC-4585-9738-C2F162AC80C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CE6EC14-23BC-4585-9738-C2F162AC80C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CE6EC14-23BC-4585-9738-C2F162AC80C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,6 +69,7 @@ Global
 		{206CD5B0-9149-4802-83E8-94541405BC7E} = {E4A53EC1-5162-460F-8829-9D8F8853F730}
 		{185F93BB-9AE7-499A-8244-5A88D9A37768} = {206CD5B0-9149-4802-83E8-94541405BC7E}
 		{A43C59E3-27CC-45B3-9B89-A6424309C964} = {206CD5B0-9149-4802-83E8-94541405BC7E}
+		{23171A3F-9343-4E00-AA5F-DF9ACCB02171} = {206CD5B0-9149-4802-83E8-94541405BC7E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1F3CF777-F491-4126-92E2-B7FE8DF6E11C}
