@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+//builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -21,10 +21,11 @@ builder.Services.AddCarter();
 
 builder.Services.AddRebus(rebus => rebus
     .Routing(r =>
-        r.TypeBased().MapAssemblyOf<ApplicationAssemblyReference>("LogNKey-queue"))
+        r.TypeBased().MapAssemblyOf<ApplicationAssemblyReference>("lognkey-queue"))
     .Transport(t =>
-        t.UseRabbitMq(builder.Configuration.GetConnectionString("MessageBroker"),
-            "LogNKey-queue"))
+        t.UseRabbitMq(
+            builder.Configuration.GetConnectionString("MessageBroker"),
+            "lognkey-queue"))
     .Sagas(s =>
         s.StoreInPostgres(
             builder.Configuration.GetConnectionString("Database"),
@@ -50,7 +51,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+//app.UseAuthorization();
 
 app.MapCarter();
 

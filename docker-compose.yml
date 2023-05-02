@@ -1,12 +1,6 @@
 version: '3.4'
 
 services:
-  lognkey.api:
-    image: ${DOCKER_REGISTRY-}lognkeyapi
-    build:
-      context: .
-      dockerfile: LogNKey.API/Dockerfile
-
   lognkey.db:
     image: postgres:latest
     container_name: LogNKey-db
@@ -32,4 +26,15 @@ services:
     environment:
         RABBITMQ_DEFAULT_USER: guest
         RABBITMQ_DEFAULT_PASS: guest
+
+  lognkey.api:
+      ports: 
+      - 32330:80
+      image: ${DOCKER_REGISTRY-}lognkeyapi
+      build:
+        context: .
+        dockerfile: ./LogNKey.API/Dockerfile
+      environment:
+            "ASPNETCORE_ENVIRONMENT": "Development"
+            "ConnectionStrings:Database": "Host=lognkey.db;Port=5432;Database=LogNKey;Username=postgres;Password=postgres;Include Error Detail=true"
   
