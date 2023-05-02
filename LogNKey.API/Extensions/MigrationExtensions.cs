@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PassGenPersistence;
+using Persistence;
 
 namespace LogNKey.API.Extensions;
 

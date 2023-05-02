@@ -1,40 +1,38 @@
 version: '3.4'
 
 services:
+  lognkey.api:
+    image: ${DOCKER_REGISTRY-}lognkeyapi
+    container_name: lognkey-api
+    build:
+      context: .
+      dockerfile: LogNKey.API/Dockerfile
+
   lognkey.db:
     image: postgres:latest
-    container_name: LogNKey-db
+    container_name: lognkey-db
     environment:
-    - POSTGRES_DB=LogNKey
-    - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=lognkey
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     volumes:
-    - ./.containers/db:/var/lib/postgresql/data
+      - ./.containers/db:/var/lib/postgresql/data
     ports:
-    - 5432:5432
+      - 5432:5432
 
   lognkey.mq:
     image: rabbitmq:3-management
-    container_name: LogNKey-MQ
+    container_name: lognkey-mq
     hostname: lognkey-mq
     volumes:
-    - ./.containers/queue/data/:/var/lib/rabbitmq
-    - ./.containers/queue/log/:/var/log/rabbitmq
+        - ./.containers/queue/data/:/var/lib/rabbitmq
+        - ./.containers/queue/log/:/var/log/rabbitmq
     ports:
-    - 5672:5672
-    - 15672:15672
+      - 5672:5672
+      - 15672:15672
     environment:
         RABBITMQ_DEFAULT_USER: guest
         RABBITMQ_DEFAULT_PASS: guest
 
-  lognkey.api:
-      ports: 
-      - 32330:80
-      image: ${DOCKER_REGISTRY-}lognkeyapi
-      build:
-        context: .
-        dockerfile: ./LogNKey.API/Dockerfile
-      environment:
-            "ASPNETCORE_ENVIRONMENT": "Development"
-            "ConnectionStrings:Database": "Host=lognkey.db;Port=5432;Database=LogNKey;Username=postgres;Password=postgres;Include Error Detail=true"
+  
   

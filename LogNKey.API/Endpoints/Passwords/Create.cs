@@ -1,6 +1,7 @@
 ﻿using Carter;
 using MediatR;
-using PassGenApplication.Passwords.Create;
+using Application.Passwords.Create;
+using Mapster;
 
 namespace LogNKey.API.Endpoints.Passwords;
 
@@ -8,13 +9,18 @@ public class Create : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("passwords", async (ISender sender) =>
+        app.MapPost("passwords", async (CreatePasswordRequest request, ISender sender) =>
         {
-            var command = new CreatePasswordCommand();
+            //var command = new CreatePasswordCommand();
 
-            await sender.Send(command);
+            CreatePasswordCommand command2 = request.Adapt<CreatePasswordCommand>();
+
+            await sender.Send(command2);
 
             return Results.Ok();
         });
     }
 }
+
+public sealed record CreatePasswordRequest(
+    int Length);

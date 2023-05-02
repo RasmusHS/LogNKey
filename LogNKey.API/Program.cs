@@ -1,17 +1,13 @@
-using LogNKey.API.Extensions;
-using PassGenApplication;
-using PassGenPersistence;
+using Application;
+using Application.Passwords.Create;
+using Carter;
+using Persistence;
 using Rebus.Config;
 using Rebus.Routing.TypeBased;
-using Carter;
-using PassGenApplication.Passwords.Create;
+using LogNKey.API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
-//builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -41,7 +37,6 @@ builder.Services.AutoRegisterHandlersFromAssemblyOf<ApplicationAssemblyReference
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -50,8 +45,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-//app.UseAuthorization();
 
 app.MapCarter();
 

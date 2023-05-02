@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>5d9ec5f2-f098-4f21-8781-3fda8e446227</UserSecretsId>
@@ -10,24 +10,27 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Carter" Version="6.1.1" />
+    <PackageReference Include="Carter" Version="7.1.0" />
+    <PackageReference Include="Mapster" Version="7.3.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.2" />
-    <PackageReference Include="RabbitMQ.Client" Version="6.5.0" />
-    <PackageReference Include="Rebus" Version="7.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
     <PackageReference Include="Rebus.PostgreSql" Version="8.1.0" />
     <PackageReference Include="Rebus.RabbitMq" Version="8.0.0" />
     <PackageReference Include="Rebus.ServiceProvider" Version="9.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Services\PassGenService\PassGenApplication\PassGenApplication.csproj" />
-    <ProjectReference Include="..\Services\PassGenService\PassGenDomain\PassGenDomain.csproj" />
-    <ProjectReference Include="..\Services\PassGenService\PassGenPersistence\PassGenPersistence.csproj" />
+    <ProjectReference Include="..\Services\PassGenService\Application\Application.csproj" />
+    <ProjectReference Include="..\Services\PassGenService\Domain\Domain.csproj" />
+    <ProjectReference Include="..\Services\PassGenService\Persistence\Persistence.csproj" />
   </ItemGroup>
 
 </Project>
