@@ -31,7 +31,7 @@ public class PasswordCreateSaga : Saga<PasswordCreateSagaData>,
         Data.PasswordGenerated = true;
 
         // Dette vil sende denne besked igennem køen og sætte gang i den respektive handler
-        await _bus.Send(new CheckGeneratedPassword(message.PasswordId)); // Starter næste step i saga
+        await _bus.Send(new CheckGeneratedPassword(message.PasswordId) {Password = message.Password}); // Starter næste step i saga
     }
 
     public Task Handle(GeneratedPasswordChecked message)
