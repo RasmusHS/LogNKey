@@ -84,7 +84,3 @@ while(True):
     data = tdif.transform([user]).toarray()
     output = model.predict(data)
     print(output)
-    #print(random_uuid)
-    
-else:
-    print("Stopped checking passwords. Re-run the script to start again.")
