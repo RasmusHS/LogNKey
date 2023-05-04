@@ -20,9 +20,9 @@ internal sealed class CreatePasswordCommandHandler : IRequestHandler<CreatePassw
     {
         var password = new PasswordEntity(request.Length);
 
-        //_context.Passwords.Add(password);
+        _context.Passwords.Add(password);
 
-        //await _context.SaveChangesAsync(cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
 
         //request.Password = password.Password;
 
