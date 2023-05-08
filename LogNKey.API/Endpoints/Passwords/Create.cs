@@ -13,9 +13,9 @@ public class Create : ICarterModule
         {
             //var command = new CreatePasswordCommand();
 
-            CreatePasswordCommand command2 = request.Adapt<CreatePasswordCommand>();
+            CreatePasswordCommand command = request.Adapt<CreatePasswordCommand>();
 
-            await sender.Send(command2);
+            await sender.Send(command);
 
             return Results.Ok();
         });
