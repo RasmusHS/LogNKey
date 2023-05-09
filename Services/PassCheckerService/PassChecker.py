@@ -4,7 +4,6 @@ import pickle
 import os
 import getpass
 import platform
-import uuid
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
@@ -80,7 +79,6 @@ print("Enter a password to test its strength")
 print("Enter Password: ")
 while(True):
     user = getpass.getpass("")
-    random_uuid = uuid.uuid4()
     data = tdif.transform([user]).toarray()
     output = model.predict(data)
     print(output)
