@@ -11,8 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PassGenService", "PassGenSe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogNKey.API", "LogNKey.API\LogNKey.API.csproj", "{BF5EB26E-8428-4AC7-A801-39CEF539E7C8}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{BAEBD59D-9CD0-4617-B09F-078621C0903C}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "Services\PassGenService\Persistence\Persistence.csproj", "{B0C6C0DB-BBA5-459B-ABF0-89CEB28CD53F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Services\PassGenService\Application\Application.csproj", "{504AEC22-9AE0-468F-9CCC-CF7C3F94F577}"
@@ -33,10 +31,6 @@ Global
 		{BF5EB26E-8428-4AC7-A801-39CEF539E7C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF5EB26E-8428-4AC7-A801-39CEF539E7C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF5EB26E-8428-4AC7-A801-39CEF539E7C8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BAEBD59D-9CD0-4617-B09F-078621C0903C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BAEBD59D-9CD0-4617-B09F-078621C0903C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BAEBD59D-9CD0-4617-B09F-078621C0903C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BAEBD59D-9CD0-4617-B09F-078621C0903C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B0C6C0DB-BBA5-459B-ABF0-89CEB28CD53F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B0C6C0DB-BBA5-459B-ABF0-89CEB28CD53F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0C6C0DB-BBA5-459B-ABF0-89CEB28CD53F}.Release|Any CPU.ActiveCfg = Release|Any CPU

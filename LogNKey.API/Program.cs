@@ -44,7 +44,11 @@ if (app.Environment.IsDevelopment())
     app.ApplyMigrations();
 }
 
-app.UseHttpsRedirection();
+//app.UseSwagger();
+//app.UseSwaggerUI();
+//app.ApplyMigrations();
+
+//app.UseHttpsRedirection();
 
 app.MapCarter();
 

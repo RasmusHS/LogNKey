@@ -5,7 +5,7 @@ using Rebus.Handlers;
 
 namespace Application.Passwords.Create;
 
-internal sealed class CheckGeneratedPasswordHandler : IHandleMessages<CheckGeneratedPassword>
+public sealed class CheckGeneratedPasswordHandler : IHandleMessages<CheckGeneratedPassword>
 {
     private readonly ILogger<CheckGeneratedPasswordHandler> _logger;
     private readonly IBus _bus;
@@ -32,52 +32,7 @@ internal sealed class CheckGeneratedPasswordHandler : IHandleMessages<CheckGener
         //if (IsNullOrEmpty(message.Password))
         //_logger.LogInformation("ERROR: No Password received {@PasswordId}", message.PasswordId);
 
-        //var source = engine.CreateScriptSourceFromFile(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, "Services/PassCheckerService/PassChecker.py"));
-
-        var psi = new ProcessStartInfo();
-        //psi.FileName = @"C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python39_64\python.exe";
-        psi.FileName = @"C:\tools\Anaconda3\envs\passMLEnv\python.exe";
-
-        var script = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, "Services\\PassCheckerService\\PassChecker.py");
-
-        var testPass = "123456";
-
-        psi.Arguments = $"\"{script}\" \"{testPass}\"";
-
-        psi.UseShellExecute = false;
-        psi.CreateNoWindow = true;
-        psi.RedirectStandardOutput = true;
-        psi.RedirectStandardError = true;
-
-        var errors = "";
-        var results = "";
-
-        var process = new Process();
-        process.StartInfo = psi;
-
-        process.Start();
-
-        var streamReader = process.StandardOutput;
-
-        var checkedPassword = streamReader.ReadLineAsync();
-
-        await process.WaitForExitAsync();
-        process.Close();
-
-
-        //using (var process = Process.Start(psi))
-        //{
-        //    errors = process.StandardError.ReadToEnd();
-        //    results = process.StandardOutput.ReadToEnd();
-        //}
-
-        Console.WriteLine("ERRORS:");
-        Console.WriteLine(errors);
-        Console.WriteLine();
-        Console.WriteLine("Results:");
-        Console.WriteLine(checkedPassword);
-
-        _logger.LogInformation("Password checked {@PasswordId}, {@results}", message.PasswordId, checkedPassword);
+        _logger.LogInformation("Password checked {@PasswordId}", message.PasswordId);
 
         await _bus.Send(new GeneratedPasswordChecked(message.PasswordId) {Password = message.Password}); //Saga slut
     }

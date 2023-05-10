@@ -2,6 +2,7 @@
 using MediatR;
 using Application.Passwords.Create;
 using Mapster;
+using Rebus.Bus;
 
 namespace LogNKey.API.Endpoints.Passwords;
 
@@ -19,6 +20,16 @@ public class Create : ICarterModule
 
             return Results.Ok();
         });
+        //app.MapPost("passwords", async (CreatePasswordRequest request, IBus bus) =>
+        //{
+        //    //var command = new CreatePasswordCommand();
+
+        //    CreatePasswordCommand command = request.Adapt<CreatePasswordCommand>();
+
+        //    await bus.Send(command);
+
+        //    return Results.Ok();
+        //});
     }
 }
 

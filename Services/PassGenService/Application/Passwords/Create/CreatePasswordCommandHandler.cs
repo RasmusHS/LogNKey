@@ -5,7 +5,7 @@ using Rebus.Bus;
 
 namespace Application.Passwords.Create;
 
-internal sealed class CreatePasswordCommandHandler : IRequestHandler<CreatePasswordCommand>
+public sealed class CreatePasswordCommandHandler : IRequestHandler<CreatePasswordCommand>
 {
     private readonly IApplicationDbContext _context;
     private readonly IBus _bus;
