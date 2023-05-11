@@ -362,3 +362,8 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 Services/PassCheckerService/PassCheckModel.pkl
+*.wal
+*.init
+.containers/db/base/16384/16385
+.containers/db/base/16384/16390
+.containers/db/base/16384/16388
