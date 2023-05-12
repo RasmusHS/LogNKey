@@ -21,7 +21,7 @@ if __name__ == "__main__":
 def root():
     return {"message": "Welcome to Your Password Strength Checker FastAPI"}
 
-@app.post("/CheckPassword")
+@app.post("/CheckPassword?{password}")
 def check_password(password: str):
     
     if(not(password)):

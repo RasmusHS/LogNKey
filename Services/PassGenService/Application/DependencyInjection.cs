@@ -1,5 +1,4 @@
-﻿using Application.Passwords.Create;
-using MediatR;
+﻿using Application.Passwords;
 using MediatR.NotificationPublishers;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,6 +21,7 @@ public static class DependencyInjection
 
             config.NotificationPublisher = new TaskWhenAllPublisher();
         });
+        //services.AddScoped<PasswordCheckerService>();
 
         //services.AddScoped<CreatePasswordCommandHandler>();
         //services.AddScoped<CheckGeneratedPasswordHandler>();

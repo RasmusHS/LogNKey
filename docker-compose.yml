@@ -17,7 +17,7 @@ services:
         #"ConnectionStrings:Database": "Server=localhost,5432;Database=lognkey;Username=postgres;Password=postgres;Include Error Detail=true"
         "ConnectionStrings:Database": "Host=lognkey.db;Port=5432;Database=lognkey;Username=postgres;Password=postgres;Include Error Detail=true"
         "ConnectionStrings:MessageBroker": "amqp://lognkey-mq:5672"
-        "ConnectionStrings:AI": "http://localhost:8000"
+        "ConnectionStrings:AI": "http://localhost:8008"
 
   PasswordChecker.ai:
     image: ${DOCKER_REGISTRY-}passwordcheckerai

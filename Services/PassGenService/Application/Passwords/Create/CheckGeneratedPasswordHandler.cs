@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Net.Http.Json;
 using Microsoft.Extensions.Logging;
 using Rebus.Bus;
 using Rebus.Handlers;
@@ -9,11 +10,15 @@ public sealed class CheckGeneratedPasswordHandler : IHandleMessages<CheckGenerat
 {
     private readonly ILogger<CheckGeneratedPasswordHandler> _logger;
     private readonly IBus _bus;
+    //private readonly PasswordCheckerService _passwordCheckerService;
+    private readonly HttpClient _httpClient;
 
-    public CheckGeneratedPasswordHandler(ILogger<CheckGeneratedPasswordHandler> logger, IBus bus)
+    public CheckGeneratedPasswordHandler(ILogger<CheckGeneratedPasswordHandler> logger, IBus bus, /*PasswordCheckerService passwordCheckerService,*/ HttpClient httpClient)
     {
         _logger = logger;
         _bus = bus;
+        //_passwordCheckerService = passwordCheckerService;
+        _httpClient = httpClient;
     }
 
     public async Task Handle(CheckGeneratedPassword message)
@@ -32,8 +37,22 @@ public sealed class CheckGeneratedPasswordHandler : IHandleMessages<CheckGenerat
         //if (IsNullOrEmpty(message.Password))
         //_logger.LogInformation("ERROR: No Password received {@PasswordId}", message.PasswordId);
 
+        await CheckPassword(message.Password);
+        //https://www.google.com/search?client=firefox-b-d&q=python+fastapi+take+requests+from+c%23+httpClient
+        //https://ernest-bonat.medium.com/using-c-to-call-python-restful-api-web-services-with-machine-learning-models-6d1af4b7787e
+
         _logger.LogInformation("Password checked {@PasswordId}", message.PasswordId);
 
         await _bus.Send(new GeneratedPasswordChecked(message.PasswordId) {Password = message.Password}); //Saga slut
+    }
+
+    private async Task CheckPassword(string password)
+    {
+        var response = await _httpClient.PostAsJsonAsync($"/CheckPassword?password={password}", password);
+
+        if (response.IsSuccessStatusCode) return;
+
+        var message = await response.Content.ReadAsStringAsync();
+        throw new Exception(message);
     }
 }

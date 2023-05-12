@@ -1,4 +1,5 @@
 using Application;
+using Application.Passwords;
 using Application.Passwords.Create;
 using Carter;
 using Persistence;
@@ -34,6 +35,9 @@ builder.Services.AddRebus(rebus => rebus
     });
 
 builder.Services.AutoRegisterHandlersFromAssemblyOf<ApplicationAssemblyReference>();
+
+builder.Services.AddHttpClient<CheckGeneratedPasswordHandler>(
+    client => client.BaseAddress = new Uri(builder.Configuration["AI"]));
 
 var app = builder.Build();
 
