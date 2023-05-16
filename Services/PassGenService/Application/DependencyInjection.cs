@@ -21,7 +21,7 @@ public static class DependencyInjection
 
             config.NotificationPublisher = new TaskWhenAllPublisher();
         });
-        //services.AddScoped<PasswordCheckerService>();
+        //services.AddScoped<IPasswordCheckService, PasswordCheckerService>();
 
         //services.AddScoped<CreatePasswordCommandHandler>();
         //services.AddScoped<CheckGeneratedPasswordHandler>();

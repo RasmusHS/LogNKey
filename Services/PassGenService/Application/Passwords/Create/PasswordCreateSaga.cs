@@ -1,4 +1,9 @@
-﻿using Rebus.Bus;
+﻿using System.Security.Cryptography;
+using Application.Data;
+using Domain;
+using Microsoft.EntityFrameworkCore;
+using PasswordGenerator;
+using Rebus.Bus;
 using Rebus.Handlers;
 using Rebus.Sagas;
 
@@ -10,10 +15,12 @@ public class PasswordCreateSaga : Saga<PasswordCreateSagaData>,
     IHandleMessages<GeneratedPasswordChecked>
 {
     private readonly IBus _bus;
+    private readonly IApplicationDbContext _context;
 
-    public PasswordCreateSaga(IBus bus)
+    public PasswordCreateSaga(IBus bus, IApplicationDbContext context)
     {
         _bus = bus;
+        _context = context;
     }
 
     protected override void CorrelateMessages(ICorrelationConfig<PasswordCreateSagaData> config)
@@ -31,7 +38,12 @@ public class PasswordCreateSaga : Saga<PasswordCreateSagaData>,
         Data.PasswordGenerated = true;
 
         // Dette vil sende denne besked igennem køen og sætte gang i den respektive handler
-        await _bus.Send(new CheckGeneratedPassword(message.PasswordId) {Password = message.Password}); // Starter næste step i saga
+        await _bus.Send(new CheckGeneratedPassword(message.PasswordId)
+        {
+            Length = message.Length, 
+            Password = message.Password, 
+            Rating = message.Rating
+        }); // Starter næste step i saga
     }
 
     public Task Handle(GeneratedPasswordChecked message)

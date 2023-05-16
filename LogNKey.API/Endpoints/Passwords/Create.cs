@@ -2,7 +2,6 @@
 using MediatR;
 using Application.Passwords.Create;
 using Mapster;
-using Rebus.Bus;
 
 namespace LogNKey.API.Endpoints.Passwords;
 
@@ -33,5 +32,10 @@ public class Create : ICarterModule
     }
 }
 
-public sealed record CreatePasswordRequest(
-    int Length);
+public sealed record CreatePasswordRequest
+(
+    int Length,
+    string? Password,
+    string? Rating
+);
+    

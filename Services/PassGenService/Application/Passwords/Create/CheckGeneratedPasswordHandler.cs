@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Net.Http.Json;
+using Application.Data;
 using Microsoft.Extensions.Logging;
 using Rebus.Bus;
 using Rebus.Handlers;
@@ -10,15 +11,19 @@ public sealed class CheckGeneratedPasswordHandler : IHandleMessages<CheckGenerat
 {
     private readonly ILogger<CheckGeneratedPasswordHandler> _logger;
     private readonly IBus _bus;
+    private readonly IPasswordCheckService _passwordCheckService;
     //private readonly PasswordCheckerService _passwordCheckerService;
     private readonly HttpClient _httpClient;
+    private readonly IApplicationDbContext _context;
 
-    public CheckGeneratedPasswordHandler(ILogger<CheckGeneratedPasswordHandler> logger, IBus bus, /*PasswordCheckerService passwordCheckerService,*/ HttpClient httpClient)
+    public CheckGeneratedPasswordHandler(ILogger<CheckGeneratedPasswordHandler> logger, IBus bus, HttpClient httpClient, IPasswordCheckService passwordCheckService, IApplicationDbContext context)
     {
         _logger = logger;
         _bus = bus;
         //_passwordCheckerService = passwordCheckerService;
         _httpClient = httpClient;
+        _passwordCheckService = passwordCheckService;
+        _context = context;
     }
 
     public async Task Handle(CheckGeneratedPassword message)
@@ -33,26 +38,45 @@ public sealed class CheckGeneratedPasswordHandler : IHandleMessages<CheckGenerat
         Hvis den ikke er tom, så sendes Password strengen til ML modellen.
         Hvis Password bliver bedømmet til at være "Weak", så sender den fejl besked tilbage til brugeren uden at gemme i Password db
         */
-        await Task.Delay(2000); // Dette er til for simulere at et password bliver checked. 
+        //await Task.Delay(2000); // Dette er til for simulere at et password bliver checked. 
         //if (IsNullOrEmpty(message.Password))
         //_logger.LogInformation("ERROR: No Password received {@PasswordId}", message.PasswordId);
 
-        await CheckPassword(message.Password);
+        //await CheckPassword(message.Password);
         //https://www.google.com/search?client=firefox-b-d&q=python+fastapi+take+requests+from+c%23+httpClient
         //https://ernest-bonat.medium.com/using-c-to-call-python-restful-api-web-services-with-machine-learning-models-6d1af4b7787e
 
+        string input = message.Password;
+
+        string uirWebAPI = $"http://host.docker.internal:8008/CheckPassword/{input}";
+
+        GeneratedPasswordChecked checkPassword = await _passwordCheckService.ApiTest(uirWebAPI);
+
+        if (checkPassword.Rating != "Weak")
+        {
+            var updateTheMediumAndTheStrong = (from passwords in _context.Passwords
+                where passwords.Id.Value == message.PasswordId
+                select passwords).FirstOrDefault();
+
+            updateTheMediumAndTheStrong.Edit(checkPassword.Rating);
+
+            _context.Passwords.Update(updateTheMediumAndTheStrong);
+        }
+        else
+        {
+            var deleteTheWeak = (from passwords in _context.Passwords
+                where passwords.Id.Value == message.PasswordId
+                select passwords).FirstOrDefault();
+            _context.Passwords.Remove(deleteTheWeak);
+        }
+
         _logger.LogInformation("Password checked {@PasswordId}", message.PasswordId);
 
-        await _bus.Send(new GeneratedPasswordChecked(message.PasswordId) {Password = message.Password}); //Saga slut
-    }
-
-    private async Task CheckPassword(string password)
-    {
-        var response = await _httpClient.PostAsJsonAsync($"/CheckPassword?password={password}", password);
-
-        if (response.IsSuccessStatusCode) return;
-
-        var message = await response.Content.ReadAsStringAsync();
-        throw new Exception(message);
+        await _bus.Send(new GeneratedPasswordChecked(message.PasswordId)
+        {
+            Length = message.Length,
+            Password = message.Password, 
+            Rating = checkPassword.Rating
+        }); //Saga slut
     }
 }

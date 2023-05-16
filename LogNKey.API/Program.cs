@@ -35,6 +35,7 @@ builder.Services.AddRebus(rebus => rebus
     });
 
 builder.Services.AutoRegisterHandlersFromAssemblyOf<ApplicationAssemblyReference>();
+builder.Services.AddScoped<IPasswordCheckService, PasswordCheckService>();
 
 builder.Services.AddHttpClient<CheckGeneratedPasswordHandler>(
     client => client.BaseAddress = new Uri(builder.Configuration["AI"]));

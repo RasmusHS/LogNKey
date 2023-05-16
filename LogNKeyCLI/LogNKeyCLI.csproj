@@ -8,11 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Json.Net" Version="1.0.33" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
     <PackageReference Include="RabbitMQ.Client" Version="6.5.0" />
     <PackageReference Include="Rebus" Version="7.1.0" />
     <PackageReference Include="Rebus.PostgreSql" Version="8.1.0" />
     <PackageReference Include="Rebus.RabbitMq" Version="8.0.0" />
     <PackageReference Include="Rebus.ServiceProvider" Version="9.0.0" />
+    <PackageReference Include="RestSharp" Version="110.2.0" />
   </ItemGroup>
 
 </Project>

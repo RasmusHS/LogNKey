@@ -13,6 +13,7 @@ public class PasswordEntity
     {
         Length = length;
         Id = new PasswordId(Guid.NewGuid());
+        Rating = "PENDING";
 
         Password = CreatePassword();
     }
@@ -31,8 +32,8 @@ public class PasswordEntity
         return password;
     }
 
-    public void Edit(PasswordId passwordId, string rating)
+    public void Edit(string rating)
     {
-
+        Rating = rating;
     }
 }
