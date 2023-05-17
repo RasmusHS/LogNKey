@@ -12,20 +12,20 @@ public class PasswordEntity
     public PasswordEntity(int length)
     {
         Length = length;
-        Id = new PasswordId(Guid.NewGuid());
+        Id = Guid.NewGuid();
         Rating = "PENDING";
 
         Password = CreatePassword();
     }
 
-    public PasswordId Id { get; private set; }
+    public Guid Id { get; private set; }
     public string? Password { get; private set; }
     public int Length { get; private set; }
     public string? Rating { get; private set; }
 
     public string CreatePassword()
     {
-        var pwd = new Password(Length);
+        var pwd = new Password(Length).IncludeLowercase().IncludeUppercase().IncludeNumeric().IncludeSpecial("!#£¤$%&{([)]=}?+|^¨~*,._-½§");
 
         var password = pwd.Next();
 

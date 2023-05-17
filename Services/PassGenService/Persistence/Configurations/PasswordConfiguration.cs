@@ -10,8 +10,8 @@ public class PasswordConfiguration : IEntityTypeConfiguration<PasswordEntity>
     {
         builder.HasKey(p => p.Id);
 
-        builder.Property(p => p.Id).HasConversion(
-            password => password.Value,
-            value => new PasswordId(value));
+        //builder.Property(p => p.Id).HasConversion(
+        //    password => password,
+        //    value => new Guid(value));
     }
 }

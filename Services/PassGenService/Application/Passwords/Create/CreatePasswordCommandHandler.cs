@@ -24,9 +24,8 @@ public sealed class CreatePasswordCommandHandler : IRequestHandler<CreatePasswor
 
         await _context.SaveChangesAsync(cancellationToken);
 
-        // Implement Outbox pattern here?
-        // If RabbitMQ goes down then the password can't be sent through the bus
-        await _bus.Send(new GeneratePasswordEvent(password.Id.Value)
+        // Saga sættes i gang
+        await _bus.Send(new GeneratePasswordEvent(password.Id)
         {
             Length = password.Length, 
             Password = password.Password, 

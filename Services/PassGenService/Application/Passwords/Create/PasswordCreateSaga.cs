@@ -1,8 +1,4 @@
-﻿using System.Security.Cryptography;
-using Application.Data;
-using Domain;
-using Microsoft.EntityFrameworkCore;
-using PasswordGenerator;
+﻿using Application.Data;
 using Rebus.Bus;
 using Rebus.Handlers;
 using Rebus.Sagas;
