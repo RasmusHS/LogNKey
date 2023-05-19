@@ -16,6 +16,4 @@ RUN /usr/local/bin/python -m pip install --upgrade pip
 
 RUN pip install ipykernel pandas numpy scikit-learn pathlib fastapi uvicorn
 
-#RUN pip install -r Services/PassCheckerService/requirements.txt
-
 CMD ["python", "app.py"]

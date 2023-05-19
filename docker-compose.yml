@@ -6,7 +6,6 @@ services:
       - "5028:80"
     #  - "7051:443"
     image: ${DOCKER_REGISTRY-}lognkeyapi
-    #container_name: lognkey-api
     build:
       context: .
       dockerfile: ./LogNKey.API/Dockerfile
@@ -14,7 +13,6 @@ services:
         "ASPNETCORE_ENVIRONMENT": "Development"
         "ASPNETCORE_URL": "http://localhost"
         "ASPNETCORE_HTTP_PORT": "5028"
-        #"ConnectionStrings:Database": "Server=localhost,5432;Database=lognkey;Username=postgres;Password=postgres;Include Error Detail=true"
         "ConnectionStrings:Database": "Host=lognkey.db;Port=5432;Database=lognkey;Username=postgres;Password=postgres;Include Error Detail=true"
         "ConnectionStrings:MessageBroker": "amqp://lognkey-mq:5672"
         "ConnectionStrings:AI": "http://localhost:8008"
