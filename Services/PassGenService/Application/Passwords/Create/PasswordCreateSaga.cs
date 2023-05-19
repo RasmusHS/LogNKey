@@ -5,7 +5,7 @@ using Rebus.Sagas;
 
 namespace Application.Passwords.Create;
 
-// Orchestrates the individual steps of the Saga
+// Orchestrator
 public class PasswordCreateSaga : Saga<PasswordCreateSagaData>,
     IAmInitiatedBy<GeneratePasswordEvent>,
     IHandleMessages<GeneratedPasswordChecked>

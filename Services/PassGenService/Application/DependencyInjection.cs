@@ -1,5 +1,4 @@
-﻿using Application.Passwords;
-using MediatR.NotificationPublishers;
+﻿using MediatR.NotificationPublishers;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application;
@@ -8,25 +7,13 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        //var assembly = typeof(DependencyInjection).Assembly;
-
-        //services.AddMediatR(configuration =>
-        //    configuration.RegisterServicesFromAssembly(assembly));
-
-        //services.AddValidatorsFromAssembly(assembly);
-
         services.AddMediatR(config =>
         {
             config.RegisterServicesFromAssemblyContaining<ApplicationAssemblyReference>();
 
             config.NotificationPublisher = new TaskWhenAllPublisher();
         });
-        //services.AddScoped<IPasswordCheckService, PasswordCheckerService>();
-
-        //services.AddScoped<CreatePasswordCommandHandler>();
-        //services.AddScoped<CheckGeneratedPasswordHandler>();
-        //services.AddScoped<PasswordCreateSaga>();
-
+        
         return services;
     }
 }

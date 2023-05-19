@@ -29,7 +29,7 @@ public sealed class CheckGeneratedPasswordHandler : IHandleMessages<CheckGenerat
 
         string uirWebAPI = $"http://host.docker.internal:8008/CheckPassword/{input}";
 
-        GeneratedPasswordChecked checkPassword = await _passwordCheckService.ApiTest(uirWebAPI);
+        GeneratedPasswordChecked checkPassword = await _passwordCheckService.GetPasswordRating(uirWebAPI);
 
         if (checkPassword.Rating != "Weak")
         {

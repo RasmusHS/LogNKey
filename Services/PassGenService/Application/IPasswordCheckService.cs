@@ -4,5 +4,5 @@ namespace Application;
 
 public interface IPasswordCheckService
 {
-    Task<GeneratedPasswordChecked> ApiTest(string uirWebAPI);
+    Task<GeneratedPasswordChecked> GetPasswordRating(string uirWebAPI);
 }

@@ -12,7 +12,7 @@ public class PasswordCheckService : IPasswordCheckService
         _httpClient = httpClient;
     }
 
-    async Task<GeneratedPasswordChecked> IPasswordCheckService.ApiTest(string uirWebAPI)
+    async Task<GeneratedPasswordChecked> IPasswordCheckService.GetPasswordRating(string uirWebAPI)
     {
         return await _httpClient.GetFromJsonAsync<GeneratedPasswordChecked>(requestUri: uirWebAPI);
     }

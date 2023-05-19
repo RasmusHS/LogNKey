@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using PasswordGenerator;
+﻿using PasswordGenerator;
 
 namespace Domain;
 
